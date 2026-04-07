@@ -189,6 +189,18 @@ h1 {
   letter-spacing: 0.02em;
 }
 
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.06em;
+  max-width: 10ch;
+  line-height: 0.98;
+}
+
+.hero-title span {
+  display: block;
+}
+
 h2 {
   font-size: clamp(1.9rem, 3vw, 3rem);
 }
@@ -510,6 +522,10 @@ h2 {
 
   h1 {
     font-size: clamp(2.5rem, 13vw, 4rem);
+  }
+
+  .hero-title {
+    max-width: 100%;
   }
 
   .hero-metrics {
