@@ -177,14 +177,15 @@ function renderProjects(filter = "all") {
 
   projectGrid.innerHTML = visible
     .map(
-      (project) => `
+      (project, index) => `
         <article class="project-card">
           <div class="project-top">
             <span class="project-tag">${project.tag}</span>
-            <span class="project-tech">${project.tech}</span>
+            <span class="project-index">No.${String(index + 1).padStart(2, "0")}</span>
           </div>
           <h3>${project.name}</h3>
           <p>${project.description}</p>
+          <span class="project-tech">${project.tech}</span>
           <a class="project-link" href="https://github.com/ThousandPetalsFall/${project.name}" target="_blank" rel="noreferrer">查看项目</a>
         </article>
       `

@@ -33,6 +33,14 @@ body {
   min-height: 100vh;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 24%);
+  pointer-events: none;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -165,6 +173,7 @@ main {
   gap: 24px;
   padding: 72px 0 36px;
   align-items: start;
+  animation: fade-up 0.7s ease both;
 }
 
 .eyebrow {
@@ -221,6 +230,11 @@ h2 {
   margin-top: 18px;
   max-width: 38rem;
   font-size: 1.04rem;
+}
+
+.section-intro {
+  max-width: 42rem;
+  margin: 12px 0 0;
 }
 
 .hero-actions {
@@ -303,6 +317,36 @@ h2 {
   gap: 14px;
 }
 
+.value-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.value-pill {
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02));
+  box-shadow: var(--shadow);
+  animation: fade-up 0.9s ease both;
+}
+
+.value-pill span {
+  display: inline-flex;
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.value-pill p {
+  margin: 10px 0 0;
+  color: var(--muted);
+}
+
 .metric-card,
 .info-card,
 .capability-card {
@@ -322,6 +366,7 @@ h2 {
 
 .section {
   padding: 56px 0 0;
+  animation: fade-up 0.85s ease both;
 }
 
 .section-head {
@@ -409,12 +454,27 @@ h2 {
   gap: 14px;
   min-height: 184px;
   transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .project-card:hover {
   transform: translateY(-4px);
   background: rgba(255, 255, 255, 0.06);
   border-color: rgba(156, 201, 245, 0.34);
+}
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(224, 190, 117, 0.08), transparent 34%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.project-card:hover::before {
+  opacity: 1;
 }
 
 .project-top {
@@ -439,16 +499,40 @@ h2 {
 
 .project-card h3 {
   font-size: 1.2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .project-card p {
   margin: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .project-link {
   margin-top: auto;
   font-weight: 700;
   color: var(--accent-3);
+  position: relative;
+  z-index: 1;
+}
+
+.project-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  position: relative;
+  z-index: 1;
 }
 
 .contact-card {
@@ -479,8 +563,25 @@ h2 {
   border-color: rgba(224, 190, 117, 0.42);
 }
 
+.contact-links a::after {
+  content: "→";
+  float: right;
+  color: var(--accent);
+}
+
 .hidden {
   display: none !important;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 1080px) {
@@ -488,7 +589,8 @@ h2 {
   .contact-card,
   .project-layout,
   .info-grid,
-  .capability-grid {
+  .capability-grid,
+  .value-strip {
     grid-template-columns: 1fr;
   }
 
